@@ -3,10 +3,9 @@
 currentUser=$( scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }' )
 checkCurl=$( /usr/bin/su - "$currentUser" -c '/opt/homebrew/bin/brew list curl' )
 
-#command liine tools for Xcode is a dependency of brew
+#command line tools for Xcode is a dependency of brew
 echo "Checking Command Line Tools for Xcode"
-# Only run if the tools are not installed yet
-# To check that try to print the SDK path
+#install command line tools if not present
 xcode-select -p &> /dev/null
 if [ $? -ne 0 ]; then
     echo "Command Line Tools for Xcode not found. Installing from softwareupdate…"
@@ -22,7 +21,7 @@ if [[ $currentUser != "loginwindow" ]]; then
     #if $checkCurl returns non-empty, install curl
     if [[ ! -z $checkCurl ]]; then
         echo "curl is installed via brew, updating..."
-        #install curl
+        #install new version of curl
         /usr/bin/su - "$currentUser" -c '/opt/homebrew/bin/brew install curl'
     else
         echo "curl isn't installed via brew, exiting..."
