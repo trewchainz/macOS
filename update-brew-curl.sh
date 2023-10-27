@@ -25,8 +25,8 @@ if [[ $currentUser != "loginwindow" ]]; then
         #install curl
         /usr/bin/su - "$currentUser" -c '/opt/homebrew/bin/brew install curl'
     else
-        echo "curl isn't installed via brew..."
+        echo "curl isn't installed via brew, exiting..."
     fi
 else
-    echo "no user is logged in..."
+    echo "no user is logged in, exiting..."
 fi
